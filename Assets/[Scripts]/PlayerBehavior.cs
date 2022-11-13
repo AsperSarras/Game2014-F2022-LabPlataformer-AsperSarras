@@ -18,10 +18,15 @@ public class PlayerBehavior : MonoBehaviour
     public Animator animator;
     public PlayerAnimState playerAnimState;
 
+    public Joystick leftJoystick;
+    [Range(0.1f, 1.0f)]
+    public float verticalThreshold;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        leftJoystick = (Application.isMobilePlatform) ? GameObject.Find("LeftStick").GetComponent<Joystick>() : null;
     }
 
     // Update is called once per frame
@@ -36,7 +41,7 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Move()
     {
-        var x = Input.GetAxisRaw("Horizontal");
+        var x = Input.GetAxisRaw("Horizontal") + ((Application.isMobilePlatform) ? leftJoystick.Horizontal : 0.0f);
 
         if(x != 0.0f)
         {
@@ -59,9 +64,9 @@ public class PlayerBehavior : MonoBehaviour
 
     private void Jump()
     {
-        var y = Input.GetAxis("Jump");
+        var y = Input.GetAxis("Jump") + ((Application.isMobilePlatform) ? leftJoystick.Vertical : 0.0f);
 
-        if((isGrounded) && y > 0.0f)
+        if ((isGrounded) && y > verticalThreshold)
         {
             rb.AddForce(Vector2.up * verticalForce, ForceMode2D.Impulse);
         }
