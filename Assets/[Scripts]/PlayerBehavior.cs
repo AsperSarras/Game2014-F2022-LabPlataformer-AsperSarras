@@ -14,9 +14,14 @@ public class PlayerBehavior : MonoBehaviour
     public bool isGrounded;
 
     private Rigidbody2D rb;
+
+    public Animator animator;
+    public PlayerAnimState playerAnimState;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -26,6 +31,7 @@ public class PlayerBehavior : MonoBehaviour
         isGrounded = hit;
         Move();
         Jump();
+        AirCheck();
     }
 
     private void Move()
@@ -41,6 +47,13 @@ public class PlayerBehavior : MonoBehaviour
 
             var clampXVel = Mathf.Clamp(rb.velocity.x, -horizontalSpeed, horizontalSpeed);
             rb.velocity = new Vector2(clampXVel, rb.velocity.y);
+
+            ChangeAnimation(PlayerAnimState.RUN);
+        }
+
+        if ((isGrounded) && (x == 0))
+        {
+            ChangeAnimation(PlayerAnimState.IDLE);
         }
     }
 
@@ -59,6 +72,22 @@ public class PlayerBehavior : MonoBehaviour
         if (x != 0.0f)
         {
             transform.localScale = new Vector3((x > 0.0f) ? 1.0f : -1.0f, 1.0f, 1.0f);
+        }
+    }
+
+    private void ChangeAnimation(PlayerAnimState animState)
+    {
+        // Change the Animation to RUN
+        //state = animState;
+        playerAnimState = animState;
+        animator.SetInteger("AnimState", (int)playerAnimState);
+    }
+
+    private void AirCheck()
+    {
+        if (!isGrounded)
+        {
+            ChangeAnimation(PlayerAnimState.JUMP);
         }
     }
 
