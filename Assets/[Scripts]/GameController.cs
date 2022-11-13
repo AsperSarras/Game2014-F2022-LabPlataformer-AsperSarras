@@ -5,8 +5,6 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject onScreenControls;
-
-    // Start is called before the first frame update
     void Awake()
     {
         onScreenControls = GameObject.Find("OnScreenControls");
