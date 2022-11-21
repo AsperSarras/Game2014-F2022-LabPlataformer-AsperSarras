@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 2589975942146652632}
   - component: {fileID: 2589975942146652633}
   - component: {fileID: 2589975942146652639}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -35,7 +35,7 @@ Transform:
   m_Children:
   - {fileID: 2589975943487934576}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2589975942146652635
 SpriteRenderer:
@@ -166,10 +166,12 @@ MonoBehaviour:
   groundRadius: 0.5
   groundLayerMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 448
   isGrounded: 0
   animator: {fileID: 0}
   playerAnimState: 0
+  leftJoystick: {fileID: 0}
+  verticalThreshold: 0.6
 --- !u!1 &2589975943487934577
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2589975943487934576}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
