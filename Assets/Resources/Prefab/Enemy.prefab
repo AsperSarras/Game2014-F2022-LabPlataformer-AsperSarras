@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6797128544726609326}
   m_Layer: 0
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -276,7 +276,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4477337959595133850}
   - component: {fileID: 5134879651536462115}
-  - component: {fileID: 8189323960737829365}
   - component: {fileID: 1135671927668797499}
   m_Layer: 0
   m_Name: PlayerDetection
@@ -316,24 +315,6 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 10
---- !u!114 &8189323960737829365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8055452139304202572}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: acbc6a29e51f1444580b4d77e478e38c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerTransform: {fileID: 0}
-  playerDetected: 0
-  LOS: 0
-  collisionLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!114 &1135671927668797499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -349,6 +330,10 @@ MonoBehaviour:
   playerTransform: {fileID: 0}
   playerDetected: 0
   LOS: 0
+  ColliderHits: {fileID: 0}
   collisionLayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 960
+  playerDirectionVector: {x: 0, y: 0}
+  playerDirection: 0
+  enemyDirection: 0

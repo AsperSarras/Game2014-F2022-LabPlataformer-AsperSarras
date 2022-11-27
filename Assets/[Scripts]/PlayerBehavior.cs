@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehavior : MonoBehaviour
 {
@@ -18,15 +19,52 @@ public class PlayerBehavior : MonoBehaviour
     public Animator animator;
     public PlayerAnimState playerAnimState;
 
+    [Header("HpSystem")]
+    public HealthBarController health;
+    public LifeCounterController life;
+    public DeathPlaneController deathPlane;
+
     public Joystick leftJoystick;
     [Range(0.1f, 1.0f)]
     public float verticalThreshold;
+
+    private SoundManager soundManager;
+
+
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        health = FindObjectOfType<PlayerHealth>().GetComponent<HealthBarController>();
+        life = FindObjectOfType<LifeCounterController>();
+        deathPlane = FindObjectOfType<DeathPlaneController>();
+        soundManager = FindObjectOfType<SoundManager>();
         leftJoystick = (Application.isMobilePlatform) ? GameObject.Find("LeftStick").GetComponent<Joystick>() : null;
+    }
+
+    void Update()
+    {
+        if(health.value <= 0)
+        {
+            life.LoseLife();
+            if(life.value > 0)
+            {
+                health.ReserHP();
+                deathPlane.ReSpawn(gameObject);
+                //Play Sound
+                soundManager.PlaySoundFX(SoundFX.HURT, Channel.PLAYER_HURT_FX);
+            }
+
+        }
+
+        if(life.value<=0)
+        {
+            //Load End Scene
+            SceneManager.LoadScene(1);
+   
+        }
+
     }
 
     // Update is called once per frame
@@ -69,6 +107,7 @@ public class PlayerBehavior : MonoBehaviour
         if ((isGrounded) && y > verticalThreshold)
         {
             rb.AddForce(Vector2.up * verticalForce, ForceMode2D.Impulse);
+            soundManager.PlaySoundFX(SoundFX.JUMP, Channel.PLAYER_FX);
         }
     }
 
@@ -100,5 +139,19 @@ public class PlayerBehavior : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(groundPoint.position,groundRadius);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            health.TakeDamage(20);
+            if (life.value > 0)
+            {
+                soundManager.PlaySoundFX(SoundFX.HURT,Channel.PLAYER_HURT_FX);
+            }
+            // Update the life value 
+            // Play Take Damage sound
+        }
     }
 }
