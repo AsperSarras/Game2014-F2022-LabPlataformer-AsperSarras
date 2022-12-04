@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Platform
+  - Enemy
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -16,8 +18,8 @@ TagManager:
   - Props
   - Platform
   - Player
-  - 
-  - 
+  - Marker
+  - Hazard
   - 
   - 
   - 
@@ -48,8 +50,14 @@ TagManager:
   - name: Props
     uniqueID: 39157543
     locked: 0
+  - name: Player_FX
+    uniqueID: 947295855
+    locked: 0
   - name: Player
     uniqueID: 3533540943
+    locked: 0
+  - name: Marker
+    uniqueID: 2942082321
     locked: 0
   - name: Ui
     uniqueID: 2818008195

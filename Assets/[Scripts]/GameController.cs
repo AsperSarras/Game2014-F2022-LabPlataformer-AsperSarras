@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public GameObject onScreenControls;
-
+    public GameObject miniMap;
 
     public SoundManager soundManager;
 
@@ -21,5 +21,20 @@ public class GameController : MonoBehaviour
 
 
         soundManager.PlayMusic();
+
+        miniMap = GameObject.Find("MiniMap");
+
+        if (miniMap)
+        {
+            miniMap.SetActive(false);
+        }
+    }
+
+    void Update()
+    {
+        if ((miniMap) && (Input.GetKeyDown(KeyCode.M)))
+        {
+            miniMap.SetActive(!miniMap.activeInHierarchy);
+        }
     }
 }
