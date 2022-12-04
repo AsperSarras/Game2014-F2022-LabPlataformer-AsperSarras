@@ -10,7 +10,7 @@ public class UIController : MonoBehaviour
 
     void Start()
     {
-        miniMap = GameObject.Find("MiniMap");
+        //miniMap = GameObject.Find("MiniMap");
     }
 
     public void RestartButtonPressed()

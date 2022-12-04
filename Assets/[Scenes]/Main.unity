@@ -6946,7 +6946,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e77bb94e0ee1f3d458be2da9f9647cbc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  miniMap: {fileID: 0}
+  miniMap: {fileID: 1116866927}
 --- !u!1 &2018676619
 GameObject:
   m_ObjectHideFlags: 3
