@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GameController : MonoBehaviour
@@ -10,24 +11,23 @@ public class GameController : MonoBehaviour
     public SoundManager soundManager;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         onScreenControls = GameObject.Find("OnScreenControls");
-
-        onScreenControls.SetActive((Application.platform != RuntimePlatform.WindowsPlayer &&
-                                    Application.platform != RuntimePlatform.WindowsEditor));
-
+        onScreenControls.SetActive(Application.isMobilePlatform);
         soundManager = FindObjectOfType<SoundManager>();
-
-
-        soundManager.PlayMusic();
-
         miniMap = GameObject.Find("MiniMap");
 
+    }
+
+    void Start()
+    {
         if (miniMap)
         {
             miniMap.SetActive(false);
         }
+        BulletManager.Instance().BuildBulletPool();
+        soundManager.PlayMusic();
     }
 
     void Update()

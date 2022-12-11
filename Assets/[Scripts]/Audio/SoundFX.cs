@@ -7,5 +7,7 @@ public enum SoundFX
     JUMP,
     HURT,
     DEATH,
-    MUSIC
+    BULLET,
+    MUSIC,
+    MUSIC_END
 }

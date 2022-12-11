@@ -8,5 +8,6 @@ public enum Channel
     PLAYER_FX,
     PLAYER_HURT_FX,
     PLAYER_DEATH_FX,
+    BULLET,
     MUSIC
 }
